@@ -2,6 +2,7 @@ package io.github.rafaelvastag;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,9 @@ public class SalesApplicationStarter {
 	@Qualifier("applicationName")
 	private String applicationName;
 
+	@Value("${application.name}")
+	private String welcomeText;
+
 	public static void main(String[] args) throws Exception {
 		SpringApplication.run(SalesApplicationStarter.class, args);
 	}
@@ -22,7 +26,7 @@ public class SalesApplicationStarter {
 	@GetMapping("/start")
 	public String sendMessageToBrowser() {
 
-		return applicationName;
+		return applicationName + " " + welcomeText;
 	}
 
 }
